@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Test positive and negative login on orangehrmlive.com" verbose="1">
+    <parameter name="browser" value="chrome"/>
+
+    <test name="LoginWithCorrectCredentials">
+        <parameter name="username" value="Admin"/>
+        <parameter name="password" value="Lbw@j2AX3X"/>
+
+        <classes>
+            <class name="com.orangehrmlive.tests.LoginPageTest"/>
+        </classes>
+    </test>
+
+</suite>
+
