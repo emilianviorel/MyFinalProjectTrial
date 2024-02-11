@@ -1,16 +1,21 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Test positive and negative login on orangehrmlive.com" verbose="1">
+<suite name="Test plan for employee page test on orangehrmlive.com" verbose="1">
     <parameter name="browser" value="chrome"/>
 
-    <test name="LoginWithCorrectCredentials">
+    <!-- Test for Employee Page -->
+    <test name="Employee Page test">
         <parameter name="username" value="Admin"/>
-        <parameter name="password" value="Lbw@j2AX3X"/>
+        <parameter name="password" value="  "/>
+        <parameter name="firstName" value="Daniel"/>
+        <parameter name="middleName" value="Marc"/>
+        <parameter name="lastName" value="Johnson"/>
+        <parameter name="joinDate" value="2024-02-10"/>
+        <parameter name="expectedToastMessage" value="Successfully Saved"/>
 
         <classes>
-            <class name="com.orangehrmlive.tests.LoginPageTest"/>
+            <class name="com.orangehrmlive.tests.EmployeePageTest"/>
         </classes>
     </test>
 
 </suite>
-

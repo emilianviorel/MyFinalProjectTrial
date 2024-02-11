@@ -1,4 +1,99 @@
 package com.orangehrmlive.pages;
 
-public class EmployeePage {
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import util.CommonUtil;
+
+import java.time.Duration;
+
+public class EmployeePage extends BasePage {
+    private final CommonUtil commonUtil;
+    private final WebDriverWait wait;
+    private final String loadingSpinnerXpath = "//oxd-loader[@ng-if='job.loading']";
+
+    @FindBy(xpath = "//a[@id='addEmployeeButton']") protected WebElement addEmployeeButton;
+    @FindBy(xpath = "//input[@id='first-name-box']") protected WebElement firstNameInput;
+    @FindBy(xpath = "//input[@id='middle-name-box']") protected WebElement middleNameInput;
+    @FindBy(xpath = "//input[@id='last-name-box']") protected WebElement lastNameInput;
+    @FindBy(xpath = "//input[@name='dateTextInput']") protected WebElement joinDateTextInput;
+    @FindBy(xpath = "//button[@data-id='location']") protected WebElement selectLocationDropdown;
+    @FindBy(xpath = "//a[@id='bs-select-1-22']") protected WebElement selectLocationOption;
+    @FindBy(xpath = "//button[@id='modal-save-button']") protected WebElement nextButton;
+    @FindBy(xpath = "(//button[contains(@class,'btn-secondary right')])[1]") protected WebElement nextButtonSequence;
+    @FindBy(xpath = "//button[@ng-show='vm.showFinishButton']") protected WebElement saveButton;
+    @FindBy(xpath = "//div[@class='toast-message']") protected WebElement toastMessage;
+    @FindBy(xpath = "(//input[contains(@id, filter_employee)])[2]") protected WebElement searchEmployeeInput;
+    @FindBy(xpath = "(//span[@class='match'])[1]") protected WebElement selectEmployeeFromSearch;
+    @FindBy(xpath = "(//a[contains(@ui-sref,'pim.employees.profile')])[3]") protected WebElement employeeName;
+
+    public EmployeePage(WebDriver driver) {
+        super(driver);
+        this.commonUtil = new CommonUtil(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(commonUtil.getImplicitWaitTime()));
+    }
+
+    public void clickAddEmployeeButton() {
+        addEmployeeButton.click();
+    }
+
+    public void fillNewEmployeeForm(String firstName, String middleName, String lastName, String joinDate) {
+        firstNameInput.sendKeys(firstName);
+        middleNameInput.sendKeys(middleName);
+        lastNameInput.sendKeys(lastName);
+        joinDateTextInput.clear();
+        joinDateTextInput.sendKeys(joinDate);
+        selectLocationDropdown.click();
+        commonUtil.scrollToElement(selectLocationOption);
+        selectLocationOption.click();
+        nextButton.click();
+    }
+
+    public void clickOnNextButton(int numberOfClicks) {
+        for (int i = 0; i < numberOfClicks; i++) {
+            waitForVueFormToLoad();
+            nextButtonSequence.click();
+        }
+        waitForVueFormToLoad();
+        saveButton.click();
+    }
+
+    public void waitForElementToBeClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForVueFormToLoad() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loadingSpinnerXpath)));
+    }
+
+    public String getToastMessage() {
+        return toastMessage.getText();
+    }
+
+    public void enterSearchText(String employeeName) {
+        searchEmployeeInput.sendKeys(employeeName);
+    }
+
+    public void selectEmployeeFromSearchResults() {
+        selectEmployeeFromSearch.click();
+    }
+
+    public String getSelectedEmployeeName() {
+        return selectEmployeeFromSearch.getText();
+    }
+
+    public String getDisplayedEmployeeName() {
+        return employeeName.getText();
+    }
+
+    public void goToEmployeeProfile() {
+        employeeName.click();
+    }
+
+    public void clickConfirmButton() {
+        nextButton.click();
+    }
 }
