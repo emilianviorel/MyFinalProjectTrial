@@ -15,16 +15,15 @@ public class EmployeePageTest extends BaseTest {
         loginPage.navigateToLoginPage();
         loginPage.enterCredentialsAndLogin(username, password);
 
-        assertTrue(dashboardPage.isDisplayedDashboardHomeIconElement(),
-                "Dashboard home icon should be displayed after successful login.");
+        assertTrue(dashboardPage.isDashboardContainerElementDisplayed(),
+                "Dashboard container should be displayed after successful login.");
     }
-
     @Parameters({"firstName", "middleName", "lastName", "joinDate", "expectedToastMessage"})
     @Test(description = "Verify adding a new employee and check the popup message", priority = 2)
     public void testAddNewEmployee(String firstName, String middleName, String lastName, String joinDate,
                                    String expectedToastMessage) {
 
-        dashboardPage.navigateToEmployeeListPage();
+        dashboardPage.navigateToEmployeePage();
         employeePage.clickAddEmployeeButton();
         employeePage.fillNewEmployeeForm(firstName, middleName, lastName, joinDate);
         employeePage.clickOnNextButton(3);
@@ -40,7 +39,7 @@ public class EmployeePageTest extends BaseTest {
 
         dashboardPage.goToDashboard();
         employeePage.waitForVueFormToLoad();
-        dashboardPage.navigateToEmployeeListPage();
+        dashboardPage.navigateToEmployeePage();
         employeePage.enterSearchText(firstName);
         employeePage.waitForVueFormToLoad();
         employeePage.selectEmployeeFromSearchResults();
