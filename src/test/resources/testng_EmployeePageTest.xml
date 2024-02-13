@@ -6,7 +6,7 @@
     <!-- Test for Employee Page -->
     <test name="Employee Page test">
         <parameter name="username" value="Admin"/>
-        <parameter name="password" value=""/>
+        <parameter name="password" value="Lbw@j2AX3X"/>
         <parameter name="firstName" value="Daniel"/>
         <parameter name="middleName" value="Marc"/>
         <parameter name="lastName" value="Johnson"/>

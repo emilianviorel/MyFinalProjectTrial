@@ -30,7 +30,7 @@ public class EmployeePageTest extends BaseTest {
 
         assertEquals(employeePage.getToastMessage(), expectedToastMessage,
                 "Popup message should match the expected message after adding a new employee.");
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
     }
 
     @Parameters({"firstName"})
@@ -38,12 +38,12 @@ public class EmployeePageTest extends BaseTest {
     public void testEmployeeFilterFunctionality(String firstName) {
 
         dashboardPage.goToDashboard();
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
         dashboardPage.navigateToEmployeePage();
         employeePage.enterSearchText(firstName);
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
         employeePage.selectEmployeeFromSearchResults();
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
 
         assertTrue(employeePage.getDisplayedEmployeeName().contains(firstName),
                 "Displayed employee name should contain the searched first name.");
@@ -55,7 +55,7 @@ public class EmployeePageTest extends BaseTest {
 
         employeePage.goToEmployeeProfile();
         personalDetailsPage.navigateToPersonalDetailsPage();
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
         personalDetailsPage.clickAddAttachmentButton();
         personalDetailsPage.uploadTextFile();
         personalDetailsPage.saveAttachment();
@@ -70,9 +70,9 @@ public class EmployeePageTest extends BaseTest {
 
         employeePage.goToEmployeeProfile();
         jobPage.navigateToJobMenu();
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
         jobPage.selectTerminateEmployee();
-        employeePage.waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
         jobPage.fillTerminateEmploymentForm();
         employeePage.clickConfirmButton();
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import util.CommonUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,8 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected DashboardPage dashboardPage;
     protected EmployeePage employeePage;
+
+    protected CommonUtil commonUtil;
     protected PersonalDetailsPage personalDetailsPage;
     protected JobPage jobPage;
 
@@ -36,6 +39,7 @@ public class BaseTest {
         employeePage = new EmployeePage(driver);
         personalDetailsPage = new PersonalDetailsPage(driver);
         jobPage = new JobPage(driver);
+        commonUtil = new CommonUtil(driver);
 
 
         driver.manage().window().maximize();

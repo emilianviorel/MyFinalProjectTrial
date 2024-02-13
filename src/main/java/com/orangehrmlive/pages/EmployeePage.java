@@ -1,19 +1,13 @@
 package com.orangehrmlive.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import util.CommonUtil;
 
-import java.time.Duration;
-
 public class EmployeePage extends BasePage {
+
     private final CommonUtil commonUtil;
-    private final WebDriverWait wait;
-    private final String loadingSpinnerXpath = "//oxd-loader[@ng-if='job.loading']";
 
     @FindBy(xpath = "//a[@id='addEmployeeButton']") protected WebElement addEmployeeButton;
     @FindBy(xpath = "//input[@id='first-name-box']") protected WebElement firstNameInput;
@@ -33,7 +27,6 @@ public class EmployeePage extends BasePage {
     public EmployeePage(WebDriver driver) {
         super(driver);
         this.commonUtil = new CommonUtil(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(commonUtil.getImplicitWaitTime()));
     }
 
     public void clickAddEmployeeButton() {
@@ -54,19 +47,11 @@ public class EmployeePage extends BasePage {
 
     public void clickOnNextButton(int numberOfClicks) {
         for (int i = 0; i < numberOfClicks; i++) {
-            waitForVueFormToLoad();
+            commonUtil.waitForVueFToLoad();
             nextButtonSequence.click();
         }
-        waitForVueFormToLoad();
+        commonUtil.waitForVueFToLoad();
         saveButton.click();
-    }
-
-    public void waitForElementToBeClickable(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void waitForVueFormToLoad() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loadingSpinnerXpath)));
     }
 
     public String getToastMessage() {
