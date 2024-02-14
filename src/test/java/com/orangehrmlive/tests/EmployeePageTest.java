@@ -14,10 +14,12 @@ public class EmployeePageTest extends BaseTest {
 
         loginPage.navigateToLoginPage();
         loginPage.enterCredentialsAndLogin(username, password);
+        commonUtil.waitForNgToLoad();
 
         assertTrue(dashboardPage.isDashboardContainerElementDisplayed(),
                 "Dashboard container should be displayed after successful login.");
     }
+
     @Parameters({"firstName", "middleName", "lastName", "joinDate", "expectedToastMessage"})
     @Test(description = "Verify adding a new employee and check the popup message", priority = 2)
     public void testAddNewEmployee(String firstName, String middleName, String lastName, String joinDate,
@@ -30,20 +32,21 @@ public class EmployeePageTest extends BaseTest {
 
         assertEquals(employeePage.getToastMessage(), expectedToastMessage,
                 "Popup message should match the expected message after adding a new employee.");
-        commonUtil.waitForVueFToLoad();
+
     }
 
     @Parameters({"firstName"})
     @Test(description = "Verify employee filter functionality", priority = 3)
     public void testEmployeeFilterFunctionality(String firstName) {
 
+        commonUtil.waitForNgToLoad();
         dashboardPage.goToDashboard();
-        commonUtil.waitForVueFToLoad();
+        commonUtil.waitForNgToLoad();
         dashboardPage.navigateToEmployeePage();
         employeePage.enterSearchText(firstName);
-        commonUtil.waitForVueFToLoad();
+        commonUtil.waitForNgToLoad();
         employeePage.selectEmployeeFromSearchResults();
-        commonUtil.waitForVueFToLoad();
+        commonUtil.waitForNgToLoad();
 
         assertTrue(employeePage.getDisplayedEmployeeName().contains(firstName),
                 "Displayed employee name should contain the searched first name.");
@@ -53,11 +56,13 @@ public class EmployeePageTest extends BaseTest {
     @Test(description = "Verify uploading a user attachment", priority = 4)
     public void testUploadFileToPersonalDetails(String expectedToastMessage) {
 
+        commonUtil.waitForNgToLoad();
         employeePage.goToEmployeeProfile();
+        commonUtil.waitForNgToLoad();
         personalDetailsPage.navigateToPersonalDetailsPage();
-        commonUtil.waitForVueFToLoad();
         personalDetailsPage.clickAddAttachmentButton();
         personalDetailsPage.uploadTextFile();
+        commonUtil.waitForNgToLoad();
         personalDetailsPage.saveAttachment();
 
         assertTrue(employeePage.getToastMessage().contains(expectedToastMessage),
@@ -68,11 +73,12 @@ public class EmployeePageTest extends BaseTest {
     @Test(description = "Verify terminate employment functionality", priority = 5)
     public void testTerminateEmployment(String expectedToastMessage) {
 
+        commonUtil.waitForNgToLoad();
         employeePage.goToEmployeeProfile();
         jobPage.navigateToJobMenu();
-        commonUtil.waitForVueFToLoad();
+        commonUtil.waitForNgToLoad();
         jobPage.selectTerminateEmployee();
-        commonUtil.waitForVueFToLoad();
+        commonUtil.waitForNgToLoad();
         jobPage.fillTerminateEmploymentForm();
         employeePage.clickConfirmButton();
 

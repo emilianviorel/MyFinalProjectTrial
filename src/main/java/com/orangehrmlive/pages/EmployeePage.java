@@ -43,14 +43,16 @@ public class EmployeePage extends BasePage {
         commonUtil.scrollToElement(selectLocationOption);
         selectLocationOption.click();
         nextButton.click();
+        commonUtil.waitForNgToLoad();
     }
 
     public void clickOnNextButton(int numberOfClicks) {
         for (int i = 0; i < numberOfClicks; i++) {
-            commonUtil.waitForVueFToLoad();
+
             nextButtonSequence.click();
+            commonUtil.waitForNgToLoad();
         }
-        commonUtil.waitForVueFToLoad();
+        commonUtil.waitForNgToLoad();
         saveButton.click();
     }
 

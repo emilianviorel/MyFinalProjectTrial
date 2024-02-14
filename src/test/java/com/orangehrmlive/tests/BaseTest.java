@@ -18,7 +18,6 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected DashboardPage dashboardPage;
     protected EmployeePage employeePage;
-
     protected CommonUtil commonUtil;
     protected PersonalDetailsPage personalDetailsPage;
     protected JobPage jobPage;

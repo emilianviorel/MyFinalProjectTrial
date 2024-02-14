@@ -15,7 +15,6 @@ public class CommonUtil {
     protected WebDriver driver;
     private final Properties properties;
     private final WebDriverWait wait;
-    private final String loadingSpinnerXpath = "//oxd-loader[@ng-if='job.loading']";
 
     public CommonUtil(WebDriver driver) {
         this.driver = driver;
@@ -39,8 +38,9 @@ public class CommonUtil {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void waitForVueFToLoad() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loadingSpinnerXpath)));
+    public void waitForNgToLoad() {
+        String ngHideElement = "//*[contains(@ng-class,'!form.hideLabel')]";
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(ngHideElement)));
     }
 
     public int getImplicitWaitTime() {
