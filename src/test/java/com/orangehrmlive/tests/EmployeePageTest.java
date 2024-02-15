@@ -26,8 +26,10 @@ public class EmployeePageTest extends BaseTest {
                                    String expectedToastMessage) {
 
         dashboardPage.navigateToEmployeePage();
+        commonUtil.waitForNgToLoad();
         employeePage.clickAddEmployeeButton();
         employeePage.fillNewEmployeeForm(firstName, middleName, lastName, joinDate);
+        commonUtil.waitForNgToLoad();
         employeePage.clickOnNextButton(3);
 
         assertEquals(employeePage.getToastMessage(), expectedToastMessage,
@@ -60,6 +62,7 @@ public class EmployeePageTest extends BaseTest {
         employeePage.goToEmployeeProfile();
         commonUtil.waitForNgToLoad();
         personalDetailsPage.navigateToPersonalDetailsPage();
+        commonUtil.waitForNgToLoad();
         personalDetailsPage.clickAddAttachmentButton();
         personalDetailsPage.uploadTextFile();
         commonUtil.waitForNgToLoad();
